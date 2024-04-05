@@ -9,27 +9,29 @@ function App() {
   const [todoItem, setTodoItem] = useState('');
 
   function inputHandler(event) {
-    setTodoItem(event.target.value);
+    const todoTitle = event.target.value;
+
+    setTodoItem(todoTitle);
   }
 
   function addTodoHandler() {
     if (todoItem !== '') {
-      setTodos([
-        ...todos,
-        {
-          id: Date.now(),
-          title: todoItem,
-        },
-      ]);
+      setTodos((prevTodo) => {
+        return [
+          ...prevTodo,
+          {
+            id: Date.now(),
+            title: todoItem,
+          },
+        ];
+      });
 
       setTodoItem('');
     }
   }
 
   function deleteTodoHandler(id) {
-    const filteredTodos = todos.filter((item) => {
-      return item.id !== id;
-    });
+    const filteredTodos = todos.filter((item) => item.id !== id);
 
     setTodos(filteredTodos);
   }
@@ -42,15 +44,15 @@ function App() {
         value={todoItem}
         onClick={addTodoHandler}
       />
-
       {todos.map((item) => {
         return (
-          <TodoListItem
-            key={item.id}
-            id={item.id}
-            title={item.title}
-            onDelete={deleteTodoHandler}
-          />
+          <ul key={item.id}>
+            <TodoListItem
+              id={item.id}
+              title={item.title}
+              onDelete={deleteTodoHandler}
+            />
+          </ul>
         );
       })}
     </div>

@@ -1,3 +1,5 @@
+import { FaPencilAlt } from 'react-icons/fa';
+
 function Input(props) {
   return (
     <div className='form'>
@@ -6,9 +8,12 @@ function Input(props) {
         onChange={props.onChange}
         value={props.value}
         placeholder='Task me up!'
+        maxLength='15'
       />
       <button onClick={props.onClick}>
-        <span>Add</span>
+        <span>
+          <FaPencilAlt />
+        </span>
       </button>
     </div>
   );

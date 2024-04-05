@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-function TodoListItem(props) {
+import { BsEraserFill } from 'react-icons/bs';
+
+export default function TodoListItem(props) {
   const [isDone, setIsDone] = useState(false);
 
   function checkItemHandler() {
@@ -8,25 +10,23 @@ function TodoListItem(props) {
   }
 
   return (
-    <ul>
-      <div className='todo-item-container'>
-        <li
-          onClick={checkItemHandler}
-          style={{ textDecoration: isDone && 'line-through' }}
-        >
-          {props.title}
-        </li>
-        <button
-          className='delete-btn'
-          onClick={() => {
-            props.onDelete(props.id);
-          }}
-        >
-          X
-        </button>
-      </div>
-    </ul>
+    <div className='todo-item-container'>
+      <li
+        onClick={checkItemHandler}
+        style={{ textDecoration: isDone && 'line-through #fdcb6e 0.3rem' }}
+      >
+        {props.title}
+      </li>
+
+      <button
+        onClick={() => {
+          props.onDelete(props.id);
+        }}
+      >
+        <span>
+          <BsEraserFill />
+        </span>
+      </button>
+    </div>
   );
 }
-
-export default TodoListItem;
